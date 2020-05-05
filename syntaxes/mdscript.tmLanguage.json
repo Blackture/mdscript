@@ -1,0 +1,1168 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "MD Script",
+	"patterns": [
+		{
+			"include": "#sections"
+		},
+		{
+			"include": "#commentar"
+		},
+		{
+			"include": "#commentar_one_line"
+		}
+	],
+	"repository": {
+		"strings": {
+			"name": "string.quoted.double.mdscript",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.mdscript",
+					"match": "\\\\."
+				}
+			]
+		},
+		"commentar": {
+			"name": "comment",
+			"begin": ":\\(",
+			"end": "\\):"
+		},
+		"commentar_one_line": {
+			"name": "comment",
+			"begin": "::",
+			"end": "\n"
+		},
+		"simicolon": {
+			"name": "entity.name.class.mdscript",
+			"match": ";"
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.mdscript",
+					"match": "\\b(if|while|return)\\b"
+				},
+				{
+					"name": "keyword.mdscript",
+					"begin": "for",
+					"end": "}",
+					"patterns": [
+						{
+							"include": "#commentar"
+						},
+						{
+							"include": "#commentar_one_line"
+						},
+						{
+							"name": "variable.language.mdscript",
+							"begin": "\\(",
+							"end": "\\)",
+							"patterns": [
+								{
+									"name": "keyword.mdscript",
+									"match": "(in)"
+								},
+								{
+									"name": "entity.name.tag",
+									"begin": "range\\[",
+									"end": "]",
+									"patterns": [
+										{
+											"name": "meta.preprocessor.numeric",
+											"match": "(1|2|3|4|5|6|7|8|9|0)"
+										}
+									]
+								},
+								{
+									"name": "variable.name.mdscript",
+									"match": "."
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		"variable.types": {
+			"patterns": [
+				{
+					"name": "string.quoted.double",
+					"begin": "\"",
+					"end": "\""
+				},
+				{
+					"name": "keyword.other",
+					"begin": "vector3\\(",
+					"end": "\\)",
+					"patterns": [
+						{
+							"name": "meta.preprocessor.numeric",
+							"match": "(1|2|3|4|5|6|7|8|9|0|~|^)"
+						},
+						{
+							"name": "entity.name.class.mdscript",
+							"begin": "(convert\\(|Convert\\()",
+							"end": "\\)",
+							"patterns": [
+								{
+									"name": "meta.preprocessor.numeric",
+									"match": "(1|2|3|4|5|6|7|8|9|0|\\.)"
+								},
+								{
+									"name": "string.quoted.double.mdscript",
+									"begin": "\"",
+									"end": "\"",
+									"patterns": [
+										{
+											"name": "constant.character.escape.mdscript",
+											"match": "\\\\."
+										}
+									]
+								},
+								{
+									"name": "variable.name",
+									"match": "."
+								}
+							]
+						},
+						{
+							"name": "meta.preprocessor.numeric",
+							"match": "\\."
+						},
+						{
+							"name": "important",
+							"match": ","
+						}
+					]
+				},
+				{
+					"name": "keyword.other",
+					"begin": "int\\(",
+					"end": "\\)",
+					"patterns": [
+						{
+							"name": "meta.preprocessor.numeric",
+							"match": "(1|2|3|4|5|6|7|8|9|0)"
+						},
+						{
+							"name": "entity.name.class.mdscript",
+							"begin": "(convert\\(|Convert\\()",
+							"end": "\\)",
+							"patterns": [
+								{
+									"name": "meta.preprocessor.numeric",
+									"match": "(1|2|3|4|5|6|7|8|9|0|\\.)"
+								},
+								{
+									"name": "string.quoted.double.mdscript",
+									"begin": "\"",
+									"end": "\"",
+									"patterns": [
+										{
+											"name": "constant.character.escape.mdscript",
+											"match": "\\\\."
+										}
+									]
+								},
+								{
+									"name": "variable.name",
+									"match": "."
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "keyword.other",
+					"begin": "bool\\(",
+					"end": "\\)",
+					"patterns": [
+						{
+							"name": "string.quoted.double",
+							"match": "(true|false)"
+						},
+						{
+							"name": "entity.name.class.mdscript",
+							"begin": "(convert\\(|Convert\\()",
+							"end": "\\)",
+							"patterns": [
+								{
+									"name": "string.quoted.double.mdscript",
+									"begin": "\"",
+									"end": "\"",
+									"patterns": [
+										{
+											"name": "constant.character.escape.mdscript",
+											"match": "\\\\."
+										}
+									]
+								},
+								{
+									"name": "variable.name",
+									"match": "."
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "important",
+					"match": ","
+				}
+			]
+		},
+		"cmdData": {
+			"patterns": [
+				{
+					"name": "entity.name.class.mdscript",
+					"begin": "Data",
+					"end": ";",
+					"patterns": [
+						{
+							"name": "important",
+							"match": "\\."
+						},
+						{
+							"name": "entity.name.function",
+							"begin": "Operation\\(",
+							"end": "\\)",
+							"patterns": [
+								{
+									"include": "#variable.types"
+								},
+								{
+									"name": "important",
+									"match": ","
+								},
+								{
+									"name": "string.quoted.double",
+									"begin": "\"",
+									"end": "\"",
+									"patterns": [
+										{
+											"name": "variable.name",
+											"match": "."
+										}
+									]
+								},
+								{
+									"name": "entity.name.selector",
+									"begin": "\\\u0040\"",
+									"end": "\""
+								},
+								{
+									"name": "keyword.other",
+									"begin": "\\[",
+									"end": "\\]",
+									"patterns": [
+										{
+											"name": "keyword.operator",
+											"match": "(\\+|\\-|\/|\\*)"
+										},
+										{
+											"name": "variable.name",
+											"match": "."
+										}
+									]
+								},
+								{
+									"name": "invalid.illegal",
+									"match": "."
+								}
+							]
+						},
+						{
+							"name": "entity.name.function",
+							"begin": "SetVar\\(",
+							"end": "\\)",
+							"patterns": [
+								{
+									"include": "#variable.types"
+								},
+								{
+									"name": "important",
+									"match": ","
+								},
+								{
+									"name": "string.quoted.double",
+									"begin": "\"",
+									"end": "\"",
+									"patterns": [
+										{
+											"name": "variable.name",
+											"match": "."
+										}
+									]
+								},
+								{
+									"name": "invalid.illegal",
+									"match": "."
+								}
+							]
+						},
+						{
+							"name": "entity.name.function",
+							"begin": "AddVar\\(",
+							"end": "\\)",
+							"patterns": [
+								{
+									"include": "#variable.types"
+								},
+								{
+									"name": "important",
+									"match": ","
+								},
+								{
+									"name": "string.quoted.double",
+									"begin": "\"",
+									"end": "\"",
+									"patterns": [
+										{
+											"name": "variable.name",
+											"match": "."
+										}
+									]
+								},
+								{
+									"name": "invalid.illegal",
+									"match": "."
+								}
+							]
+						}
+					]
+				},
+				{
+					"include": "#commentar"
+				},
+				{
+					"include": "#commentar_one_line"
+				},
+				{
+					"include": "#keywords"
+				}
+			]
+		},
+		"cmdManagement": {
+			"name": "entity.name.class.mdscript",
+			"begin": "Management",
+			"end": ";",
+			"patterns": [
+				{
+					"include": "#commentar_one_line"
+				},
+				{
+					"include": "#commentar"
+				},
+				{
+					"name": "important",
+					"match": "(\\.)"
+				},
+				{
+					"name": "entity.name.function",
+					"begin": "Add\\(",
+					"end": "\\)",
+					"patterns": [
+						{
+							"name": "string.quoted.double",
+							"begin": "\"",
+							"end": "\""
+						},
+						{
+							"name": "important",
+							"match": ","
+						}
+					]
+				},
+				{
+					"name": "entity.name.function",
+					"begin": "Remove\\(",
+					"end": "\\)",
+					"patterns": [
+						{
+							"name": "string.quoted.double",
+							"begin": "\"",
+							"end": "\"",
+							"patterns": [
+								{
+									"name": "variable.name",
+									"match": "."
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "entity.name.method.mdscript",
+					"begin": "Create\\[",
+					"end": "]",
+					"patterns": [
+						{
+							"name": "entity.name.function",
+							"begin": "Item\\(",
+							"end": "\\)",
+							"patterns": [
+								{
+									"name": "constant.language",
+									"begin": "Setup \\{",
+									"end": "\\}",
+									"patterns": [
+										{
+											"name": "this",
+											"begin": "this",
+											"end": ";\r",
+											"patterns": [
+												{
+													"include": "#commentar_one_line"
+												},
+												{
+													"include": "#commentar"
+												},
+												{
+													"name": "entity.name.function",
+													"begin": "SetName\\(",
+													"end": "\\)",
+													"patterns": [
+														{
+															"name": "string.quoted.double",
+															"begin": "\"",
+															"end": "\""
+														}
+													]
+												},
+												{
+													"name": "important",
+													"match": "(\\.)"
+												},
+												{
+													"name": "entity.name.class",
+													"match": ";"
+												},
+												{
+													"name": "entity.name.function",
+													"begin": "SetDefaultItem\\(",
+													"end": "\\)",
+													"patterns": [
+														{
+															"name": "string.quoted.double",
+															"begin": "\"",
+															"end": "\""
+														}
+													]
+												},
+												{
+													"name": "entity.name.function",
+													"begin": "SetCustomModel\\(",
+													"end": "\\)",
+													"patterns": [
+														{
+															"name": "string.quoted.double",
+															"begin": "\"",
+															"end": "\""
+														}
+													]
+												},
+												{
+													"name": "entity.name.function",
+													"begin": "SetTexture\\(",
+													"end": "\\)",
+													"patterns": [
+														{
+															"name": "string.quoted.double",
+															"begin": "\"",
+															"end": "\""
+														}
+													]
+												},
+												{
+													"name": "entity.name.function",
+													"begin": "Renderer\\(",
+													"end": "\\)",
+													"patterns": [
+														{
+															"name": "entity.name.selector",
+															"begin": "@\"",
+															"end": "\""
+														}
+													]
+												},
+												{
+													"name": "entity.name.method.mdscript",
+													"begin": "Get\\[",
+													"end": "]",
+													"patterns": [
+														{
+															"name": "entity.name.function",
+															"begin": "use\\(",
+															"end": "\\)",
+															"patterns": [
+																{
+																	"name": "entity.name.selector",
+																	"begin": "@\"",
+																	"end": "\""
+																}
+															]
+														},
+														{
+															"name": "entity.name.function",
+															"begin": "Create\\(",
+															"end": "\\)",
+															"patterns": [
+																{
+																	"name": "entity.name.selector",
+																	"begin": "@VariantName\\(",
+																	"end": "\\)",
+																	"patterns": [
+																		{
+																			"name": "string.quoted.double",
+																			"begin": "\"",
+																			"end": "\""
+																		}
+																	]
+																},
+																{
+																	"name": "entity.name.class",
+																	"match": ";"
+																},
+																{
+																	"name": "entity.name.selector",
+																	"begin": "@\"LootTable\": \\{",
+																	"end": "\\}",
+																	"patterns": [
+																		{
+																			"name": "entity.name.class",
+																			"begin": "LootTable",
+																			"end": ";",
+																			"patterns": [
+																				{
+																					"name": "entity.name.function",
+																					"begin": "Name\\(",
+																					"end": "\\)",
+																					"patterns": [
+																						{
+																							"name": "string.quoted.double",
+																							"begin": "\"",
+																							"end": "\""
+																						}
+																					]
+																				},
+																				{
+																					"name": "entity.name.function",
+																					"begin": "ItemChance\\(",
+																					"end": "\\)",
+																					"patterns": [
+																						{
+																							"name": "string.quoted.double",
+																							"begin": "\"",
+																							"end": "\""
+																						},
+																						{
+																							"name": "this",
+																							"match": "this"
+																						},
+																						{
+																							"name": "entity.name.selector",
+																							"begin": "@",
+																							"end": "%"
+																						}
+																					]
+																				},
+																				{
+																					"name": "entity.name.function",
+																					"begin": "Create\\(",
+																					"end": "\\)",
+																					"patterns": [
+																						{
+																							"name": "string.quoted.double",
+																							"begin": "\"",
+																							"end": "\""
+																						},
+																						{
+																							"name": "this",
+																							"match": "this"
+																						},
+																						{
+																							"name": "important",
+																							"match": "\\."
+																						},
+																						{
+																							"name": "entity.name.class",
+																							"match": "LootTable"
+																						}
+																					]
+																				},
+																				{
+																					"name": "important",
+																					"match": "\\."
+																				},
+																				{
+																					"include": "#commentar"
+																				},
+																				{
+																					"include": "#commentar_one_line"
+																				}
+																			]
+																		},
+																		{
+																			"include": "#commentar"
+																		},
+																		{
+																			"include": "#commentar_one_line"
+																		}
+																	]
+																},
+																{
+																	"name": "entity.name.selector",
+																	"begin": "@\"Crafting\": \\{",
+																	"end": "\\}",
+																	"patterns": [
+																		{
+																			"include": "#commentar"
+																		},
+																		{
+																			"include": "#commentar_one_line"
+																		},
+																		{
+																			"name": "entity.name.class",
+																			"begin": "Crafting",
+																			"end": ";",
+																			"patterns": [
+																				{
+																					"name": "entity.name.function",
+																					"begin": "Name\\(",
+																					"end": "\\)",
+																					"patterns": [
+																						{
+																							"name": "string.quoted.double",
+																							"begin": "\"",
+																							"end": "\""
+																						}
+																					]
+																				},
+																				{
+																					"name": "entity.name.function",
+																					"begin": "Drop\\(",
+																					"end": "\\)",
+																					"patterns": [
+																						{
+																							"include": "#variable.types"
+																						},
+																						{
+																							"include": "#commentar"
+																						},
+																						{
+																							"include": "#commentar_one_line"
+																						}
+																					]
+																				},
+																				{
+																					"name": "entity.name.method.mdscript",
+																					"begin": "Drop\\[",
+																					"end": "]",
+																					"patterns": [
+																						{
+																							"name": "entity.name.function",
+																							"begin": "Items\\(",
+																							"end": "\\)",
+																							"patterns": [
+																								{
+																									"include": "#variable.types"
+																								}
+																							]
+																						},
+																						{
+																							"name": "entity.name.selector",
+																							"begin": "@\"",
+																							"end": "\"",
+																							"patterns": [
+																								{
+																									"include": "#variable.types"
+																								}
+																							]
+																						},
+																						{
+																							"name": "entity.name.function",
+																							"begin": "Block\\(",
+																							"end": "\\)",
+																							"patterns": [
+																								{
+																									"include": "#variable.types"
+																								}
+																							]
+																						}
+																					]
+																				},
+																				{
+																					"name": "entity.name.method.mdscript",
+																					"begin": "CustomTable\\[",
+																					"end": "]",
+																					"patterns": [
+
+																						{
+																							"include": "#commentar"
+																						},
+																						{
+																							"include": "#commentar_one_line"
+																						},
+																						{
+																							"name": "entity.name.function",
+																							"begin": "Create\\(",
+																							"end": "\\)",
+																							"patterns": [
+																								{
+																									"name": "constant.language",
+																									"begin": "Setup \\{",
+																									"end": "\\}",
+																									"patterns": [
+																										
+																									]
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"include": "#commentar"
+																},
+																{
+																	"include": "#commentar_one_line"
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"name": "important",
+											"match": "\\."
+										},
+										{
+											"include": "#commentar"
+										},
+										{
+											"include": "#commentar_one_line"
+										}
+									]
+								},
+								{
+									"include": "#commentar"
+								},
+								{
+									"include": "#commentar_one_line"
+								}
+								
+							]
+						},
+						{
+							"name": "important",
+							"match": "(;|\\.)"
+						},
+						{
+							"include": "#commentar"
+						},
+						{
+							"include": "#commentar_one_line"
+						}
+					]
+				}
+			]
+		},
+		"cmdDisplay": {
+			"name": "entity.name.class",
+			"begin": "Display",
+			"end": ";",
+			"patterns": [
+				{
+					"name": "important",
+					"match": "\\."
+				},
+				{
+					"name": "entity.name.function",
+					"begin": "Show\\(",
+					"end": "\\)",
+					"patterns": [
+						{
+							"name": "string.quoted.double",
+							"begin": "\"",
+							"end": "\""
+						},
+						{
+							"name": "important",
+							"match": ","
+						}
+					]
+				},
+				{
+					"name": "entity.name.function",
+					"begin": "Modify\\(",
+					"end": "\\)",
+					"patterns": [
+						{
+							"name": "string.quoted.double",
+							"begin": "\"",
+							"end": "\"",
+							"patterns": [
+								{
+									"name": "variable.name",
+									"match": "."
+								}
+							]
+						},
+						{
+							"name": "important",
+							"match": ","
+						},
+						{
+							"name": "variable.language",
+							"begin": "\\[",
+							"end": "]",
+							"patterns": [
+								{
+									"name": "string.quoted.double",
+									"begin": "\"",
+									"end": "\"",
+									"patterns": [
+										{
+											"name": "variable.name",
+											"match": "."
+										}
+									]
+								},
+								{
+									"name": "keyword.operator",
+									"match": "set"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "entity.name.method.mdscript",
+					"begin": "Camera\\[",
+					"end": "]",
+					"patterns": [
+						{
+							"name": "entity.name.function",
+							"begin": "Render\\(",
+							"end": "\\)",
+							"patterns": [
+								{
+									"name": "entity.name.selector",
+									"begin": "@\"",
+									"end": "\"",
+									"patterns": [
+										{
+											"name": "variable.language",
+											"match": "."
+										}
+									]
+								},
+								{
+									"name": "important",
+									"match": ","
+								},
+								{
+									"name": "string.quoted.double",
+									"begin": "\"",
+									"end": "\"",
+									"patterns": [
+										{
+											"name": "constant.language",
+											"begin": "§",
+											"end": "."
+										}
+									]
+								}								
+							]
+						},
+						{
+							"name": "entity.name.function",
+							"begin": "Move\\(",
+							"end": "\\)",
+							"patterns": [
+								{
+									"name": "entity.name.method.mdscript",
+									"begin": "use\\[",
+									"end": "]",
+									"patterns": [
+										{
+											"name": "string.quoted.double",
+											"begin": "\"",
+											"end": "\"",
+											"patterns": [
+												{
+													"name": "variable.name",
+													"match": "."
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "string.quoted.double",
+									"begin": "\"",
+									"end": "\"",
+									"patterns": [
+										{
+											"name": "variable.language",
+											"match": "."
+										}
+									]
+								},
+								{
+									"name": "entity.name.selector",
+									"begin": "Look@\"",
+									"end": "\"",
+									"patterns": [
+										{
+											"name": "string.other",
+											"match": "."
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "entity.name.function",
+							"begin": "PositionList\\(",
+							"end": "\\)",
+							"patterns": [
+								{
+									"name": "variable.parameter",
+									"begin": "\\[",
+									"end": "]",
+									"patterns": [
+										{
+											"name": "string.quoted.double",
+											"begin": "\"",
+											"end": "\"",
+											"patterns": [
+												{
+													"name": "variable.name",
+													"match": "."
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "entity.name.selector",
+									"begin": "@\"",
+									"end": "\"",
+									"patterns": [
+										{
+											"name": "variable.name",
+											"match": "."
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		"sections": {
+			"patterns": [
+				{
+					"name": "entity.name.section.mdscript",
+					"begin": "init:",
+					"end": ":end",
+					"patterns": [
+						{
+							"include": "#strings"
+						},
+						{
+							"include": "#InitClasses"
+						},
+						{
+							"include": "#commentar"
+						},
+						{
+							"include": "#commentar_one_line"
+						},
+						{
+							"include": "#simicolon"
+						},
+						{
+							"name": "invalid.illegal",
+							"match": "."
+						}
+					]
+				},
+				{
+					"name": "entity.name.section.mdscript",
+					"begin": "engine:",
+					"end": ":end",
+					"patterns": [
+						{
+							"include": "#strings"
+						},
+						{
+							"include": "#keywords"
+						},
+						{
+							"include": "#commentar"
+						},
+						{
+							"include": "#EngineClasses"
+						},
+						{
+							"include": "#commentar_one_line"
+						},
+						{
+							"include": "#simicolon"
+						}
+					]
+				}
+			]
+		},
+		"InitClasses": {
+			"name": "entity.name.class.mdscript",
+			"begin": "Datapack",
+			"end": ";",
+			"patterns": [
+				{
+					"name": "entity.name.function.mdscript",
+					"match": "Description"
+				},
+				{
+					"name": "entity.name.function.mdscript",
+					"match": "(\\(|\\))"
+				},
+				{
+					"name": "variable.language",
+					"begin": "Version",
+					"end": "\\)",
+					"patterns": [
+						{
+							"name": "meta.preprocessor.numeric",
+							"match": "(1|2|3|4|5|6|7|8|9|0)"
+						},
+						{
+							"name": "meta.preprocessor.numeric",
+							"match": "\\."
+						},
+						{
+							"name": "important",
+							"match": "="
+						},
+						{
+							"name": "variable.language",
+							"match": "."
+						}
+					]
+				},
+				{
+					"name": "variable.language",
+					"begin": "Name",
+					"end": "\\)",
+					"patterns": [
+						{
+							"name": "variable.language",
+							"match": "(\\(|\\))"
+						},
+						{
+							"name": "string.quoted.double.mdscript",
+							"begin": "\"",
+							"end": "\"",
+							"patterns": [
+								{
+									"name": "constant.character.escape.mdscript",
+									"match": "\\\\."
+								}
+							]
+						},
+						{
+							"name": "important",
+							"match": "="
+						}
+					]
+				},
+				{
+					"name": "entity.name.function.mdscript",
+					"begin": "PackFormat",
+					"end": "\\)",
+					"patterns": [
+						{
+							"name": "constant.numeric",
+							"match": "(1|2|3|4|5|6|7|8|9|0)"
+						},
+						{
+							"name": "entity.name.function.mdscript",
+							"match": "."
+						}
+					]
+				},
+				{
+					"name": "string.quoted.double.mdscript",
+					"begin": "\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"name": "constant.character.escape.mdscript",
+							"match": "\\\\."
+						}
+					]
+				},
+				{
+					"name": "important",
+					"match": ";"
+				},
+				{
+					"name": "important",
+					"match": "."
+				}
+			]
+		},
+		"EngineClasses": {
+			"patterns": [
+				{
+					"name": "variable.name"
+				},
+				{
+					"name": "entity.name.method.mdscript",
+					"begin": "start \\[",
+					"end": "]",
+					"patterns": [
+						{
+							"include": "#cmdData"
+						},
+						{
+							"include": "#cmdManagement"
+						},
+						{
+							"include": "#cmdDisplay"
+						}
+					]
+				},
+				{
+					"name": "entity.name.method.mdscript",
+					"begin": "main \\[",
+					"end": "]",
+					"patterns": [
+						{
+							"include": "#cmdData"
+						},
+						{
+							"include": "#cmdManagement"
+						},
+						{
+							"include": "#cmdDisplay"
+						}
+					]
+				}
+			]
+		}
+	},
+	"scopeName": "source.mds",
+	"fileTypes": [
+		"mds"
+	]
+}

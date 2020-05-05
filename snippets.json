@@ -1,0 +1,31 @@
+{
+	"Initialize Module": {
+		"prefix": "init",
+		"body": [
+			"init:",
+			"\tDatapack.Description(\"\");",
+			"\tDatapack.Version = ();",
+			"\tDatapack.PackFormat();",
+			"\tDatapack.Name = (\"\");",
+			":end",
+			"$7"
+		],
+		"description": "Adds Initialize Component to your script"
+	},
+	"Engine Module": {
+		"prefix": "engine",
+		"body": [
+			"engine:",
+			"\tstart [",
+			"$3\t\t",
+			"\t]",
+			"$5",
+			"\tmain [",
+			"$7\t\t",
+			"\t]",
+			":end",
+			"$10"
+		],
+		"description": "Adds Engine Component to your script"
+	}
+}

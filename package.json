@@ -1,0 +1,71 @@
+{
+	"name": "mdscript",
+	"displayName": "Minecraft Datapack Script",
+	"description": "Create in a more common way a minecraft datapack",
+	"version": "0.0.1",
+	"author": {
+		"name": "BlaXrew Studios",
+		"url": "http://www.blaxrew-studios.tk",
+		"email": "blackture@blaxrew-studios.tk"
+	},
+	"icon": "https://www.google.de/url?sa=i&url=http%3A%2F%2Fblaxrew-studios.bplaced.net%2F&psig=AOvVaw1meCxpcr4YrO0nJ8ncr8QU&ust=1587793820655000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOjI1YevgOkCFQAAAAAdAAAAABAD",
+	"engines": {
+		"vscode": "^1.44.0"
+	},
+	"categories": [
+		"Themes",
+		"Programming Languages",
+		"Snippets"
+	],
+	"contributes": {
+		"themes": [
+			{
+				"label": "MD Script Theme",
+				"uiTheme": "vs-dark",
+				"path": "./themes/MD Script Theme-color-theme.json"
+			}
+		],
+		"languages": [
+			{
+				"id": "mdscript",
+				"aliases": [
+					"MD Script",
+					"mdscript"
+				],
+				"extensions": [
+					".mds"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"snippets": [
+			{
+				"language": "mdscript",
+				"path": "./snippets.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "mdscript",
+				"scopeName": "source.mds",
+				"path": "./syntaxes/mdscript.tmLanguage.json"
+			}
+		],
+		"semanticTokenTypes": [
+			{
+				"id": "templateType",
+				"superType": "type",
+				"description": "A template type."
+			}
+		],
+		"semanticTokenModifiers": [
+			{
+				"id": "native",
+				"description": "Annotates a symbol that is implemented natively"
+			}
+		]
+	},
+	"scripts": {
+		"compile": ".\\compile.js"
+	}
+}
