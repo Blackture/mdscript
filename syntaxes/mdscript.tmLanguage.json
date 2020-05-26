@@ -411,7 +411,7 @@
 										{
 											"name": "this",
 											"begin": "this",
-											"end": ";\r",
+											"end": ";",
 											"patterns": [
 												{
 													"include": "#commentar_one_line"
@@ -629,6 +629,10 @@
 																			"end": ";",
 																			"patterns": [
 																				{
+																					"name": "important",
+																					"match": "\\."
+																				},
+																				{
 																					"name": "entity.name.function",
 																					"begin": "Name\\(",
 																					"end": "\\)",
@@ -698,7 +702,10 @@
 																					"begin": "CustomTable\\[",
 																					"end": "]",
 																					"patterns": [
-
+																						{
+																							"name": "entity.name.class",
+																							"match": ";"
+																						},
 																						{
 																							"include": "#commentar"
 																						},
@@ -715,7 +722,142 @@
 																									"begin": "Setup \\{",
 																									"end": "\\}",
 																									"patterns": [
-																										
+																										{
+																											"include": "#commentar"
+																										},
+																										{
+																											"include": "#commentar_one_line"
+																										},
+																										{
+																											"name": "entity.name.class",
+																											"begin": "Table",
+																											"end": ";",
+																											"patterns": [
+																												{
+																													"name": "important",
+																													"match": "\\."
+																												},
+																												{
+																													"include": "#commentar"
+																												},
+																												{
+																													"include": "#commentar_one_line"
+																												},
+																												{
+																													"name": "entity.name.function",
+																													"begin": "Name\\(",
+																													"end": "\\)",
+																													"patterns": [
+																														{
+																															"include": "#variable.types"
+																														}
+																													]
+																												},
+																												{
+																													"name": "entity.name.function",
+																													"begin": "SetCustomModel\\(",
+																													"end": "\\)",
+																													"patterns": [
+																														{
+																															"include": "#variable.types"
+																														}
+																													]
+																												},
+																												{
+																													"name": "entity.name.function",
+																													"begin": "SetTexture\\(",
+																													"end": "\\)",
+																													"patterns": [
+																														{
+																															"include": "#variable.types"
+																														}
+																													]
+																												},
+																												{
+																													"name": "entity.name.method.mdscript",
+																													"begin": "GUI\\[",
+																													"end": "]",
+																													"patterns": [
+																														{
+																															"include": "#commentar"
+																														},
+																														{
+																															"include": "#commentar_one_line"
+																														},
+																														{
+																															"name": "entity.name.class",
+																															"begin": "GUI",
+																															"end": ";",
+																															"patterns": [
+																																{
+																																	"name": "important",
+																																	"match": "\\."
+																																},
+																																{
+																																	"name": "entity.name.function",
+																																	"begin": "ForegroundIMG\\(",
+																																	"end": "\\)",
+																																	"patterns": [
+																																		{
+																																			"include": "#variable.types"
+																																		}
+																																	]
+																																},
+																																{
+																																	"name": "entity.name.function",
+																																	"begin": "BackgroundIMG\\(",
+																																	"end": "\\)",
+																																	"patterns": [
+																																		{
+																																			"include": "#variable.types"
+																																		}
+																																	]
+																																},
+																																{
+																																	"name": "entity.name.function",
+																																	"begin": "InteractableFields\\(",
+																																	"end": "\\)",
+																																	"patterns": [
+																																		{
+																																			"include": "#commentar"
+																																		},
+																																		{
+																																			"include": "#commentar_one_line"
+																																		},
+																																		{
+																																			"name": "string.quoted.double",
+																																			"begin": "\"",
+																																			"end": "\""
+																																		},
+																																		{
+																																			"name": "important",
+																																			"match": ","
+																																		}
+																																	]
+																																}
+																															]
+																														}
+																													]
+																												}
+																											]
+																										}
+																									]
+																								}
+																							]
+																						},
+																						{
+																							"name": "entity.name.function",
+																							"begin": "Reference\\(",
+																							"end": "\\)",
+																							"patterns": [
+																								{
+																									"name": "entity.name.method.mdscript",
+																									"begin": "use\\[",
+																									"end": "]",
+																									"patterns": [
+																										{
+																											"include": "#variable.types"
+																										}
 																									]
 																								}
 																							]
@@ -901,17 +1043,6 @@
 													"match": "."
 												}
 											]
-										}
-									]
-								},
-								{
-									"name": "string.quoted.double",
-									"begin": "\"",
-									"end": "\"",
-									"patterns": [
-										{
-											"name": "variable.language",
-											"match": "."
 										}
 									]
 								},
