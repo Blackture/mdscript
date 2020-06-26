@@ -338,6 +338,10 @@
 								{
 									"name": "entity.name.method.mdscript",
 									"match": "(\\bCamera\\b|\\[)"
+								},
+								{
+									"name": "keyword.operator",
+									"match": "\\."
 								}
 							]
 						}
