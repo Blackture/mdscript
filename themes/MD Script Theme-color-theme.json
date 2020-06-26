@@ -645,6 +645,16 @@
 			}
 		},
 		{
+			"name": "error",
+			"scope": [
+				"error",
+			],
+			"settings": {
+				"foreground": "#fd4343",
+				"fontStyle": "italic"
+			}
+		},
+		{
 			"name": "Markdown - Fenced Language",
 			"scope": [
 				"variable.language.fenced.markdown"

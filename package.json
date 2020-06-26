@@ -33,7 +33,8 @@
 					"mdscript"
 				],
 				"extensions": [
-					".mds"
+					".mds",
+					".mdscript"
 				],
 				"configuration": "./language-configuration.json"
 			}
@@ -47,7 +48,7 @@
 		"grammars": [
 			{
 				"language": "mdscript",
-				"scopeName": "source.mds",
+				"scopeName": "source.mdscript",
 				"path": "./syntaxes/mdscript.tmLanguage.json"
 			}
 		],
