@@ -323,7 +323,106 @@
 			]
 		},
 		"DisplayClass": {
-			
+			"patterns": [
+				{
+					"name": "entity.name.class",
+					"begin": "(\\bDisplay\\b).(\\bShow\\b|\\bModify\\b|\\bCamera\\b)([(]|\\[)",
+					"end": "([)]|]);",
+					"beginCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"name": "entity.name.function",
+									"match": "(\\bShow\\b|\\bModify\\b|[(])"
+								},
+								{
+									"name": "entity.name.method.mdscript",
+									"match": "(\\bCamera\\b|\\[)"
+								}
+							]
+						}
+					},
+					"patterns": [
+						{
+							"include": "#keywords"
+						},
+						{
+							"name": "keyword.operator",
+							"match": "(\\bset\\b|\\[|])"
+						},
+						{
+							"name": "entity.name.function",
+							"match": "[)]"
+						},
+						{
+							"name": "entity.name.function",
+							"begin": "(\\bRender\\b|\\bMove\\b|\\bPositionList\\b|[(])",
+							"beginCaptures": {
+								"0": {
+									"patterns": [
+										{
+											"name": "entity.name.function",
+											"begin": "(\\bRender[(]\\b|\\bMove[(]\\b|\\bPositionList[(]\\b)",
+											"end": "[)]"
+										}
+									]
+								}
+							},
+							"patterns": [
+								{
+									"include": "#keywords"
+								},
+								{
+									"name": "entity.name.method.mdscript",
+									"match": "(use\\[)([_a-zA-Z][_a-zA-Z0-9]{0,})(])",
+									"captures": {
+										"2": {
+											"name": "variable.name"
+										}
+									}
+								},
+								{
+									"name": "variable.language",
+									"match": "\\bLook\\b"
+								},
+								{
+									"name": "variable.language",
+									"match": "(\\bspeed\\b[(])([0-9]{1,}\\.[0-9]{1,}|[0-9]{1,})([)])",
+									"captures": {
+										"0": {
+											"patterns": [
+												{
+													"name": "constant.numeric",
+													"match": "[0-9]|\\."
+												}
+											]
+										}
+									}
+								}
+							],
+							"end": "[)]"
+						}
+					],
+					"endCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"name": "keyword.operator",
+									"match": ";"
+								},
+								{
+									"name": "entity.name.function",
+									"match": "[)]"
+								},
+								{
+									"name": "entity.name.method.mdscript",
+									"match": "]"
+								}
+							]
+						}
+					}
+				}
+			]
 		}
 	},
 	"scopeName": "source.mdscript",
