@@ -290,6 +290,81 @@
 				},
 				{
 					"name": "entity.name.class",
+					"begin": "(\\bManagement\\b)\\.\\b(Create)\\b\\[",
+					"beginCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"name": "entity.name.method.mdscript",
+									"match": "\\[|\\bCreate\\b"
+								},
+								{
+									"name": "keyword.operator",
+									"match": "\\."
+								}
+							]
+						}
+					},
+					"patterns": [
+						{
+							"name": "entity.name.function",
+							"begin": "(\\bItem\\b)|(\\bBlock\\b)[(]",
+							"patterns": [
+								{
+									"name": "entity.name.function",
+									"match": "[(]"
+								},
+								{
+									"name": "entity.name.method.mdscript",
+									"begin": "(\\bSetup\\b) \\[",
+									"patterns": [
+										{
+											"include": "#keywords"
+										},
+										{
+											"include": "#commentary"
+										},
+										{
+											"include": "#commentary_one_line"
+										},
+										{
+											"include": "#this_Item"
+										}
+									],
+									"end": "]"
+								},
+								{
+									"include": "#commentary"	
+								},
+								{
+									"include": "#commentary_one_line"	
+								},
+								{
+									"name": "error",
+									"match": "."
+								}
+							],
+							"end": "[)]"
+						}
+					],
+					"end": "];",
+					"endCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"name": "entity.name.method.mdscript",
+									"match": "]"
+								},
+								{
+									"name": "keyword.operator",
+									"match": ";"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "entity.name.class",
 					"match": "(\\bManagement\\b)\\.\\b(Add|Remove)\\b[(]((\"(.{1,})\", \"([_a-zA-Z][_a-zA-Z0-9]{0,})\")|(.{1,}))[)];",
 					"captures": {
 						"0": {
@@ -427,6 +502,129 @@
 					}
 				}
 			]
+		},
+		"this_Item": {
+			"patterns": [
+				{
+					"name": "this",
+					"begin": "(\\bthis\\b).\\b(Get)\\b\\[",
+					"beginCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"name": "keyword.operator",
+									"match": "\\."
+								},
+								{
+									"name": "entity.name.method.mdscript",
+									"match": "\\bGet\\b\\["
+								}
+							]
+						}
+					},
+					"patterns": [
+						{
+							"include": "#commentary"
+						},
+						{
+							"include": "#commentary_one_line"
+						},
+						{
+							"name": "entity.name.function",
+							"begin": "\\bCreate\\b[(]",
+							"patterns": [
+								{
+									"include": "#commentary"
+								},
+								{
+									"include": "#commentary_one_line"
+								},
+								{
+									"include": "#newConst"
+								},
+								{
+									"include": "#keywords"
+								}
+							],
+							"end": "[)]"
+						}
+					],
+					"end": "]",
+					"endCaptures": {
+						"0": {
+							"name": "entity.name.method.mdscript"
+						}
+					}
+				},
+				{
+					"name": "this",
+					"begin": "(\\bthis\\b).\\b(SetName|SetDefaultItem|SetCustomModel|SetTexture|Renderer)\\b([(])",
+					"beginCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"name": "keyword.operator",
+									"match": "\\."
+								},
+								{
+									"name": "entity.name.function",
+									"match": "([(])|\\b(SetName|SetDefaultItem|SetCustomModel|SetTexture|Renderer)\\b"
+								}
+							]
+						}
+					},
+					"patterns": [
+						{
+							"include": "#keywords"
+						}
+					],
+					"end": "[)];",
+					"endCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"name": "entity.name.function",
+									"match": "[)]"
+								},
+								{
+									"name": "keyword.operator",
+									"match": ";"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"newConst": {
+			"name": "variable.language",
+			"begin": "(@\\b(LootTable|Crafting|Furnace|Blasting|Campfire|Smoking|Stonecutter)\\b) (= \\bnew\\b)( {)",
+			"beginCaptures": {
+				"0": {
+					"patterns": [
+						{
+							"name": "entity.name.selector",
+							"match": "(@\\b(LootTable|Crafting|Furnace|Blasting|Campfire|Smoking|Stonecutter)\\b)"
+						},
+						{
+							"name": "keyword.operator",
+							"match": "="
+						}
+					]
+				}
+			},
+			"patterns": [
+				{
+					"include": "#commentary"
+				},
+				{
+					"include": "#commentary_one_line"
+				}
+			],
+			"end": "}"
+		},
+		"LootTableClass": {
+			
 		}
 	},
 	"scopeName": "source.mdscript",
