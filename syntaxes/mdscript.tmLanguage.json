@@ -106,6 +106,10 @@
 					]
 				},
 				{
+					"name": "entity.name.selector",
+					"match": "(@[0-9]{1,}%)|(@[0-9]{1,}.[0-9]{1,}%)"
+				},
+				{
 					"name": "keyword.operator",
 					"match": "(=|\\.|;|,|\\+|-|=|%|\\/|\\*|<|>)"
 				},
@@ -136,6 +140,25 @@
 						{
 							"name": "constant.numeric",
 							"match": "\\b([0-9]{1,})\\b"
+						},
+						{
+							"name": "error",
+							"match": "."
+						}
+					]
+				},
+				{
+					"name": "variable.language",
+					"begin": "vector3[(]",
+					"end": "[)]",
+					"patterns": [
+						{
+							"name": "constant.numeric",
+							"match": "\\b([0-9]{1,})\\b|~"
+						},
+						{
+							"name": "keyword.operator",
+							"match": ","
 						},
 						{
 							"name": "error",
@@ -619,12 +642,75 @@
 				},
 				{
 					"include": "#commentary_one_line"
+				},
+				{
+					"include": "#NewClasses"
 				}
 			],
 			"end": "}"
 		},
-		"LootTableClass": {
-			
+		"NewClasses": {
+			"name": "entity.name.class",
+			"begin": "\\b(LootTable|Crafting)\\b\\.\\b(Name|ItemChance|Create|Drop|use)\\b([(]|\\[|)",
+			"beginCaptures": {
+				"0": {
+					"patterns": [
+						{
+							"name": "keyword.operator",
+							"match": "\\."
+						},
+						{
+							"name": "entity.name.function",
+							"match": "(\\bCreate\\b)|([(])"
+						},
+						{
+							"name": "entity.name.method.mdscript",
+							"match": "(\\buse\\b|\\bDrop\\b)\\["
+						},
+						{
+							"name": "variable.language",
+							"match": "\\b(Drop|Name|ItemChance)\\b"
+						}
+					]
+				}
+			},
+			"patterns": [
+				{
+					"include": "#keywords"
+				},
+				{
+					"name": "this",
+					"match": "\\bthis\\b"
+				},
+				{
+					"name": "variable.language",
+					"match": "\\bLootTable\\b"
+				},
+				{
+					"name": "entity.name.function",
+					"match": "\\b(Items|Block)\\b|([(])|[)]"
+				}
+			],
+			"end": "([)]|]|);",
+			"endCaptures": {
+				"0": {
+					"patterns": [
+						{
+							"name": "keyword.operator",
+							"match": ";"	
+						},
+						{
+							"name": "entity.name.function",
+							"match": "[)]"
+						}
+						,
+						{
+							"name": "entity.name.method.mdscript",
+							"match": "]"
+						}
+					]
+				}
+			}
 		}
 	},
 	"scopeName": "source.mdscript",
