@@ -8,7 +8,7 @@ init:
 :end
 
 engine:
-    ::start will be executed on every reload or everytime you join
+    ::start will be executed whenever the load.json of minecraft would load
     start [
         for (x@storage_module in range[0,3]) { ::Python styled for loop
             Data.AddVar("tool", int(43), @storage_module);
