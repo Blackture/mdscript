@@ -1,0 +1,97 @@
+:( The Values have to be in braces ):
+
+init:
+    Datapack.Description = "Test Pack";
+    Datapack.Version = 1.0;
+    Datapack.PackFormat = 5;
+    Datapack.Name = "MyPack";
+:end
+
+engine:
+    ::start will be executed on every reload or everytime you join
+    start [
+        for (x@storage_module in range[0,3]) { ::Python styled for loop
+            Data.AddVar("tool", int(43), @storage_module);
+            Data.Operation(tool = x, @storage_module, @storage_module);
+        }    
+        Data.AddVar("toll", bool(true), @storage_module); ::Data.AddVar("toll", bool(false));
+        Data.SetVar(toll, bool(true), @storage_module); ::Data.SetVar("variable name", variable(value))
+        Data.Operation(toll += episch, @storage_module_1, @storage_module_2); :: Data.Operation[variable 1 operation-module(operation-module) variable 2], "output variable name" @"storage module"
+        Management.Add("storage_module", "storage_module_name"); :: Management.Add("storage_module", "storage_module_name");
+        Management.Remove(storage_module_name); :: Management.Remove("storage_module");
+        Display.Show(storage_module, "where_to_show"); ::Display.Show("storage_module", "where_to_show");
+        Display.Modify(@storage_module, ["modifier name" set "set modifier value"]); ::Display.Modify("storage_module", ["modifier name" set "set modifier value"]);
+        Display.Camera[Render(@type, "§rstring")]; ::Display.Camera[Render(@"type", "string")]; type is meant to be sth like title, subetitle, actionbar etc. §r is as example a color code to reset the color; string is what should be shown
+        Display.Camera[Move(use[PositionList_Name], Look@selector, speed(0.5))]; ::Display.Camera[Move(use["PositionList_Name"], "linear", Look@"selector")]; use the look@"selector" to focus on a specific miencraft entity e.g.: @e[type=armor_stand, speed is the speed of the duration between each point in ticks
+        Display.Camera[PositionList("positionListName", ["vector3_01","vector3_02"]@storage_module)]; :: Display.Camera.PositionList(["vector3_01","vector3_02"]@"storage_module");  Make a vector3 list for the camera move and save them into a specific module (Default name is set to PositionList0 then 1 etc.)
+        Data.AddVar("V3", vector3(1, 2, 3), @storage_module); :: Variable Type Vector3, you can do ~ ~ ~ or ^ ^ ^ as well
+        Management.Create[
+            Item(
+                Setup [
+                    this.SetName("name_string");
+                    this.SetDefaultItem("minecraft:whatever");
+                    this.SetCustomModel("path_string"); ::has to be a json model
+                    this.SetTexture("path_string"); ::Has to be a png file with a resolution which is a multiplier of 16. For more information search for minecraft textures resolution
+                    this.Renderer(@renderer_type); ::Hand Hold or Generated means default or sword holding variants
+                    ::this.Get[use[@variant]]; if you want the @cheat presetted variant
+                    this.Get[Create(
+                        @VariantName = "Test Variant"; ::Assignment of the variant name                     
+                        @LootTable = new { ::Creation of a new loot table
+                            LootTable.Name = "test"; ::name your loot table
+                            LootTable.ItemChance = this@1.2%; :: LootTable.ItemChance(this@percentage%); if you create another item and use the same loot table name it would be assigned to it
+                            LootTable.ItemChance = "minecraft:whatever"@66%; ::LootTable.ItemChance("minecraft:whatever"@percentage%); Use this line if you want to  assign a default minecraft item
+                            :(if you use an existing loot table (created already) you can assign this item by using:
+                            LootTable.use[this.LootTable@LootTableToAssign]; ):
+                            LootTable.use[this.LootTable@LootTableToAssign];
+                            ::if you want to create a new loot table use this command for it:
+                            LootTable.Create(this.LootTable); ::you cannot assign an existing minecraft loot table!!!
+                        }
+                        :: Possibilities are @Crafting, @Furnace, @Blasting, @Campfire, @Smoking, @Stonecutter
+                        @Crafting = new {
+                            Crafting.Name("test"); ::name your crafting recipe
+                            ::-- Drop Crafting --------------------------------------------------------------------------------------------
+                            Crafting.Drop = bool(false); ::would you want to make a drop crafting recipe
+                            ::if the bool above is set to true it would look like that
+                            Crafting.Drop[Items("minecraft:whatever", "minecraft:whatever", ...)];
+                            ::Crafting.Drop[Items("minecraft:whatever", "minecraft:whatever", ...)];
+                            ::Crafting.Drop[vector3(~, 1, ~1), Block("minecraft:whatever")]; ::Create a vector3 in here directly or use an existing one as shown below:
+                            ::Crafting.Drop[@vector3Name, Block("minecraft:whatever")]; ::Crafting.Drop[@"vector3", Block("minecraft:whatever")]; where and what block is used to drop @"vector3"
+                            ::-------------------------------------------------------------------------------------------------------------
+                            ::Crafting.UseCustomTable("Crafter"); use this if you have one, you can use the default if you want to make a default minecraft item craftable
+                            Crafting.CustomTable[
+                                Create(
+                                    Setup { 
+                                        Table.Name("name_string"); ::Color keys are enabled for the name; ::you can do " " too.
+                                        Table.SetCustomModel("path_string"); ::model pathing
+                                        Table.SetTexture("path_string"); ::texture pathing
+                                        Table.GUI[                              ::setting up crafting table gui
+                                            GUI.ForegroundIMG("path_string"); ::link a image to a gui image file
+                                            GUI.BackgroundIMG("path_string"); ::link a backgroundIMG -> use a color you can't see -> transparency enableds
+                                            GUI.InteractableFields( ::use a chest to look for the right slots and list them like shown
+                                                "0",                
+                                                "5",
+                                                "10"
+                                            );
+                                        ];
+                                    }
+                                );
+                                Reference(use["Reference_path"]);                                
+                            ];
+                        }                             
+                    )];
+                ]
+            )
+        ];
+    ]
+    
+    ::will be executed every tick - too many things in here will cause lags ingame
+    main [
+        
+    ]
+
+    ::will be executed every second
+    second {
+
+    }
+
+:end
