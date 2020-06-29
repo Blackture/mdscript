@@ -4,4 +4,3 @@
 - A visualizer for mdscript is planned (MDScript GUI)
 
 Copyright © 2020 [BlaXrew Studios](https://www.blaxrew-studios.vision). All rights reserved.
-![Logo](https://www.blaxrew-studios.vision/resources/favicon.ico)
