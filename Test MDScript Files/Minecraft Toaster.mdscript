@@ -5,6 +5,8 @@ init:
     Datapack.Version = 1.0;
     Datapack.PackFormat = 5;
     Datapack.Name = "MyPack";
+
+    esdf = ReferenceFile.Import("path"); ::if you want to include another file, the name before is used to use the reference in the code
 :end
 
 engine:
@@ -42,9 +44,10 @@ engine:
                             LootTable.ItemChance = "minecraft:whatever"@66%; ::LootTable.ItemChance("minecraft:whatever"@percentage%); Use this line if you want to  assign a default minecraft item
                             :(if you use an existing loot table (created already) you can assign this item by using:
                             LootTable.use[this.LootTable@LootTableToAssign]; ):
-                            LootTable.use[this.LootTable@LootTableToAssign];
                             ::if you want to create a new loot table use this command for it:
                             LootTable.Create(this.LootTable); ::you cannot assign an existing minecraft loot table!!!
+
+                            LootTable.use[this.LootTable@LootTableToAssign];
                         }
                         :: Possibilities are @Crafting, @Furnace, @Blasting, @Campfire, @Smoking, @Stonecutter
                         @Crafting = new {
@@ -57,25 +60,27 @@ engine:
                             ::Crafting.Drop[vector3(~, 1, ~1), Block("minecraft:whatever")]; ::Create a vector3 in here directly or use an existing one as shown below:
                             ::Crafting.Drop[@vector3Name, Block("minecraft:whatever")]; ::Crafting.Drop[@"vector3", Block("minecraft:whatever")]; where and what block is used to drop @"vector3"
                             ::-------------------------------------------------------------------------------------------------------------
-                            ::Crafting.UseCustomTable("Crafter"); use this if you have one, you can use the default if you want to make a default minecraft item craftable
+                            Crafting.UseCustomTable("Crafter"); :: use this if you have one, you can use the default if you want to make a default minecraft item craftable
                             Crafting.CustomTable[
+
+                                ::Reference(use["Reference_path"]);
+
                                 Create(
-                                    Setup { 
-                                        Table.Name("name_string"); ::Color keys are enabled for the name; ::you can do " " too.
+                                    Setup [ 
+                                        Table.Name = "name_string"; ::Color keys are enabled for the name; ::you can do " " too.
                                         Table.SetCustomModel("path_string"); ::model pathing
                                         Table.SetTexture("path_string"); ::texture pathing
                                         Table.GUI[                              ::setting up crafting table gui
-                                            GUI.ForegroundIMG("path_string"); ::link a image to a gui image file
-                                            GUI.BackgroundIMG("path_string"); ::link a backgroundIMG -> use a color you can't see -> transparency enableds
+                                            GUI.SetForegroundIMG("path_string"); ::link a image to a gui image file
+                                            GUI.SetBackgroundIMG("path_string"); ::link a backgroundIMG -> use a color you can't see -> transparency enableds
                                             GUI.InteractableFields( ::use a chest to look for the right slots and list them like shown
                                                 "0",                
                                                 "5",
                                                 "10"
                                             );
                                         ];
-                                    }
-                                );
-                                Reference(use["Reference_path"]);                                
+                                    ];
+                                );                              
                             ];
                         }                             
                     )];
@@ -86,7 +91,6 @@ engine:
     
     ::will be executed every tick - too many things in here will cause lags ingame
     main [
-        
     ]
 
     ::will be executed every second

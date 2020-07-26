@@ -189,6 +189,46 @@
 			]
 		},
 		"InitClasses": {
+			"patterns": [
+				{
+					"include": "#DatapackClass"
+				},
+				{
+					"include": "#ReferenceFileClass"
+				}
+			]
+		},
+		"ReferenceFileClass": {
+			"name": "entity.name.class",
+			"match": "[A-Za-z_][_A-Za-z0-9]{0,} = \\bReferenceFile\\b\\.\\bImport\\b[(]\".+\"[)];",
+			"captures": {
+				"0": {
+					"patterns": [
+						{
+							"name": "entity.name.class",
+							"match": "\\b(ReferenceFile)\\b"
+						},
+						{
+							"name": "entity.name.function",
+							"match": "\\b(Import)\\b|[(]|[)]"
+						},
+						{
+							"name": "string.quoted.double",
+							"match": "\".+\""
+						},
+						{
+							"name": "keyword.operator",
+							"match": "(=|\\.|;)"
+						},
+						{
+							"name": "variable.name",
+							"match": "."
+						}
+					]
+				}
+			}
+		},
+		"DatapackClass": {
 			"name": "entity.name.class",
 			"match": "(\\bDatapack\\b)\\.(\\bDescription\\b|\\bVersion\\b|\\bPackFormat\\b|\\bName\\b)(( = [.0-9]{1,})| = (\".{1,}\"|\"[_a-zA-Z][_a-zA-Z0-9]{0,}\"));",
 			"captures": {
@@ -248,6 +288,46 @@
 							"include": "#commentary_one_line"
 						},
 						{
+							"include": "#StartClassCollection"
+						},
+						{
+							"name": "error",
+							"match": "."
+						}
+					]
+				},
+				{
+					"name": "entity.name.method.mdscript",
+					"begin": "main \\[",
+					"end": "]",
+					"patterns": [
+						{
+							"include": "#commentary"
+						},
+						{
+							"include": "#commentary_one_line"
+						},
+						{
+							"include": "#MainClassCollection"
+						},
+						{
+							"name": "error",
+							"match": "."
+						}
+					]
+				},
+				{
+					"name": "entity.name.method.mdscript",
+					"begin": "second \\[",
+					"end": "]",
+					"patterns": [
+						{
+							"include": "#commentary"
+						},
+						{
+							"include": "#commentary_one_line"
+						},
+						{
 							"include": "#MainClassCollection"
 						},
 						{
@@ -258,7 +338,39 @@
 				}
 			]
 		},
+		"StartClassCollection": {
+			"patterns": [
+				{
+					"include": "#DataClass"
+				},
+				{
+					"include": "#ManagementClass"
+				},
+				{
+					"include": "#DisplayClass"
+				},
+				{
+					"include": "#keywords"
+				}
+			]
+		},
 		"MainClassCollection": {
+			"patterns": [
+				{
+					"include": "#DataClass"
+				},
+				{
+					"include": "#ManagementClass"
+				},
+				{
+					"include": "#DisplayClass"
+				},
+				{
+					"include": "#keywords"
+				}
+			]
+		},
+		"SecondClassCollection": {
 			"patterns": [
 				{
 					"include": "#DataClass"
@@ -357,10 +469,10 @@
 									"end": "]"
 								},
 								{
-									"include": "#commentary"	
+									"include": "#commentary"
 								},
 								{
-									"include": "#commentary_one_line"	
+									"include": "#commentary_one_line"
 								},
 								{
 									"name": "error",
@@ -651,7 +763,7 @@
 		},
 		"NewClasses": {
 			"name": "entity.name.class",
-			"begin": "\\b(LootTable|Crafting)\\b\\.\\b(Name|ItemChance|Create|Drop|use)\\b([(]|\\[|)",
+			"begin": "\\b(LootTable|Crafting)\\b\\.\\b(Name|ItemChance|Create|Drop|use|UseCustomTable|CustomTable)\\b([(]|\\[|)",
 			"beginCaptures": {
 				"0": {
 					"patterns": [
@@ -661,11 +773,11 @@
 						},
 						{
 							"name": "entity.name.function",
-							"match": "(\\bCreate\\b)|([(])"
+							"match": "(\\bCreate\\b|\\bUseCustomTable\\b)|([(])"
 						},
 						{
 							"name": "entity.name.method.mdscript",
-							"match": "(\\buse\\b|\\bDrop\\b)\\["
+							"match": "(\\buse\\b|\\bDrop\\b|\\bCustomTable\\b)\\["
 						},
 						{
 							"name": "variable.language",
@@ -676,7 +788,144 @@
 			},
 			"patterns": [
 				{
+					"include": "#commentary"
+				},
+				{
+					"include": "#commentary_one_line"
+				},
+				{
 					"include": "#keywords"
+				},
+				{
+					"name": "entity.name.method.mdscript",
+					"begin": "\\b(Setup)\\b|\\[|]",
+					"patterns": [
+						{
+							"include": "#commentary"
+						},
+						{
+							"include": "#commentary_one_line"
+						},
+						{
+							"name": "entity.name.class",
+							"begin": "\\b(Table)\\b\\.\\b(Name|SetCustomModel|SetTexture|GUI)\\b([(]|\\[| =)",
+							"beginCaptures": {
+								"0": {
+									"patterns": [
+										{
+											"name": "keyword.operator",
+											"match": "(=|\\.)"
+										},
+										{
+											"name": "variable.language",
+											"match": "\\b(Name)\\b"
+										},
+										{
+											"name": "entity.name.function",
+											"match": "\\b(SetCustomModel|SetTexture)\\b|[(]"
+										},
+										{
+											"name": "entity.name.method.mdscript",
+											"match": "\\b(GUI)\\b|\\["
+										}
+									]
+								}
+							},
+							"patterns": [
+								{
+									"include": "#commentary"
+								},
+								{
+									"include": "#commentary_one_line"
+								},
+								{
+									"include": "#keywords"
+								},
+								{
+									"name": "entity.name.class",
+									"begin": "\\b(GUI)\\b\\.\\b(SetForegroundIMG|SetBackgroundIMG|InteractableFields)\\b[(]",
+									"beginCaptures": {
+										"0": {
+											"patterns": [
+												{
+													"name": "entity.name.function",
+													"match": "\\b(SetForegroundIMG|SetBackgroundIMG|InteractableFields)\\b|[(]"
+												},
+												{
+													"name": "keyword.operator",
+													"match": "(=|\\.)"
+												}
+											]
+										}
+									},
+									"patterns": [
+										{
+											"include": "#commentary"
+										},
+										{
+											"include": "#commentary_one_line"
+										},
+										{
+											"include": "#keywords"
+										}
+									],
+									"end": "[)];",
+									"endCaptures": {
+										"0": {
+											"patterns": [
+												{
+													"name": "keyword.operator",
+													"match": ";"
+												},
+												{
+													"name": "entity.name.function",
+													"match": "[)]"
+												}
+											]
+										}
+									}
+								}
+							],
+							"end": "([)]|]|);",
+							"endCaptures": {
+								"0": {
+									"patterns": [
+										{
+											"name": "keyword.operator",
+											"match": ";"
+										},
+										{
+											"name": "entity.name.function",
+											"match": "[)]"
+										},
+										{
+											"name": "entity.name.method.mdscript",
+											"match": "]"
+										}
+									]
+								}
+							}
+						}
+					],
+					"end": "];",
+					"endCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"name": "keyword.operator",
+									"match": ";"
+								},
+								{
+									"name": "entity.name.function",
+									"match": "[)]"
+								},
+								{
+									"name": "entity.name.method.mdscript",
+									"match": "]"
+								}
+							]
+						}
+					}
 				},
 				{
 					"name": "this",
@@ -688,7 +937,45 @@
 				},
 				{
 					"name": "entity.name.function",
-					"match": "\\b(Items|Block)\\b|([(])|[)]"
+					"match": "\\b(Items|Block|Create)\\b|([(])|[)]"
+				},
+				{
+					"name": "entity.name.function",
+					"begin": "\\bReference\\b[(]",
+					"patterns": [
+						{
+							"name": "entity.name.method.mdscript",
+							"match": "\\buse\\b\\[\".+\"]",
+							"captures": {
+								"0": {
+									"patterns": [
+										{
+											"include": "#keywords"
+										}
+									]
+								}
+							}
+						}
+					],
+					"end": "[)];",			
+					"endCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"name": "keyword.operator",
+									"match": ";"
+								},
+								{
+									"name": "entity.name.function",
+									"match": "[)]"
+								},
+								{
+									"name": "entity.name.method.mdscript",
+									"match": "]"
+								}
+							]
+						}
+					}
 				}
 			],
 			"end": "([)]|]|);",
@@ -697,13 +984,12 @@
 					"patterns": [
 						{
 							"name": "keyword.operator",
-							"match": ";"	
+							"match": ";"
 						},
 						{
 							"name": "entity.name.function",
 							"match": "[)]"
-						}
-						,
+						},
 						{
 							"name": "entity.name.method.mdscript",
 							"match": "]"
