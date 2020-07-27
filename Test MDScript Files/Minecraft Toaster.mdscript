@@ -6,7 +6,7 @@ init:
     Datapack.PackFormat = 5;
     Datapack.Name = "MyPack";
 
-    esdf = ReferenceFile.Import("path"); ::if you want to include another file, the name before is used to use the reference in the code; bsp: esdf.he[];
+    esdf = ReferenceFile.Import("C:\Users\patri\Documents\GitHub\mdscript\Test MDScript Files\mdscript.mds"); ::if you want to include another file, the name before is used to use the reference in the code; bsp: esdf.he[];
 :end
 
 engine:

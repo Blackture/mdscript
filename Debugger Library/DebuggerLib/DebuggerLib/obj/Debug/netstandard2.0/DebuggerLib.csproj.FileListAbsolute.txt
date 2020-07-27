@@ -1,0 +1,9 @@
+C:\Users\patri\Documents\GitHub\mdscript\Debugger Library\DebuggerLib\DebuggerLib\bin\Debug\netstandard2.0\DebuggerLib.deps.json
+C:\Users\patri\Documents\GitHub\mdscript\Debugger Library\DebuggerLib\DebuggerLib\bin\Debug\netstandard2.0\DebuggerLib.dll
+C:\Users\patri\Documents\GitHub\mdscript\Debugger Library\DebuggerLib\DebuggerLib\bin\Debug\netstandard2.0\DebuggerLib.pdb
+C:\Users\patri\Documents\GitHub\mdscript\Debugger Library\DebuggerLib\DebuggerLib\obj\Debug\netstandard2.0\DebuggerLib.csprojAssemblyReference.cache
+C:\Users\patri\Documents\GitHub\mdscript\Debugger Library\DebuggerLib\DebuggerLib\obj\Debug\netstandard2.0\DebuggerLib.AssemblyInfoInputs.cache
+C:\Users\patri\Documents\GitHub\mdscript\Debugger Library\DebuggerLib\DebuggerLib\obj\Debug\netstandard2.0\DebuggerLib.AssemblyInfo.cs
+C:\Users\patri\Documents\GitHub\mdscript\Debugger Library\DebuggerLib\DebuggerLib\obj\Debug\netstandard2.0\DebuggerLib.csproj.CoreCompileInputs.cache
+C:\Users\patri\Documents\GitHub\mdscript\Debugger Library\DebuggerLib\DebuggerLib\obj\Debug\netstandard2.0\DebuggerLib.dll
+C:\Users\patri\Documents\GitHub\mdscript\Debugger Library\DebuggerLib\DebuggerLib\obj\Debug\netstandard2.0\DebuggerLib.pdb

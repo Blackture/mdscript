@@ -1,20 +1,9 @@
-:( The Values have to be in braces ):
-
-init:
-    Datapack.Description = "Test Pack";
-    Datapack.Version = 1.0;
-    Datapack.PackFormat = 5;
-    Datapack.Name = "MyPack";
-:end
-
-engine:
-    ::start will be executed on every reload or everytime you join
-    start [
-        for (x@storage_module in range[0,3]) { ::Python styled for loop
-            Data.AddVar("tool", int(43), @storage_module);
-            Data.Operation(tool = x, @storage_module, @storage_module);
-        }    
-        Data.AddVar("toll", bool(true), @storage_module); ::Data.AddVar("toll", bool(false));
+start [
+   	for (x@storage_module in range[0,3]) { ::Python styled for loop
+        	Data.AddVar("tool", int(43), @storage_module);
+		Data.Operation(tool = x, @storage_module, @storage_module);
+	}
+    	Data.AddVar("toll", bool(true), @storage_module); ::Data.AddVar("toll", bool(false));
         Data.SetVar(toll, bool(true), @storage_module); ::Data.SetVar("variable name", variable(value))
         Data.Operation(toll += episch, @storage_module_1, @storage_module_2); :: Data.Operation[variable 1 operation-module(operation-module) variable 2], "output variable name" @"storage module"
         Management.Add("storage_module", "storage_module_name"); :: Management.Add("storage_module", "storage_module_name");
