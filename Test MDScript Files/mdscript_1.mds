@@ -1,23 +1,9 @@
-:( The Values have to be in braces ):
-
-init:
-    Datapack.Description = "Test Pack";
-    Datapack.Version = 1.0;
-    Datapack.PackFormat = 5;
-    Datapack.Name = "MyPack";
-
-    esdf = ReferenceFile.Import("C:\Users\patri\Documents\GitHub\mdscript\Test MDScript Files\mdscript.mds"); ::if you want to include another file, the name before is used to use the reference in the code; bsp: esdf.he[];
-    bulb = ReferenceFile.Import("C:\Users\patri\Documents\GitHub\mdscript\Test MDScript Files\mdscript_1.mds");
-:end
-
-engine:
-    ::start will be executed whenever the load.json of minecraft would load
-    start [
-        for (x@storage_module in range[0,3]) { ::Python styled for loop
-            Data.AddVar("tool", int(43), @storage_module);
-            Data.Operation(tool = x, @storage_module, @storage_module);
-        }    
-        Data.AddVar("toll", bool(true), @storage_module); ::Data.AddVar("toll", bool(false));
+start [
+   	for (x@storage_module in range[0,3]) { ::Python styled for loop
+        	Data.AddVar("tool", int(43), @storage_module);
+		Data.Operation(tool = x, @storage_module, @storage_module);
+	}
+    	Data.AddVar("toll", bool(true), @storage_module); ::Data.AddVar("toll", bool(false));
         Data.SetVar(toll, bool(true), @storage_module); ::Data.SetVar("variable name", variable(value))
         Data.Operation(toll += episch, @storage_module_1, @storage_module_2); :: Data.Operation[variable 1 operation-module(operation-module) variable 2], "output variable name" @"storage module"
         Management.Add("storage_module", "storage_module_name"); :: Management.Add("storage_module", "storage_module_name");
@@ -45,10 +31,9 @@ engine:
                             LootTable.ItemChance = "minecraft:whatever"@66%; ::LootTable.ItemChance("minecraft:whatever"@percentage%); Use this line if you want to  assign a default minecraft item
                             :(if you use an existing loot table (created already) you can assign this item by using:
                             LootTable.use[this.LootTable@LootTableToAssign]; ):
+                            LootTable.use[this.LootTable@LootTableToAssign];
                             ::if you want to create a new loot table use this command for it:
                             LootTable.Create(this.LootTable); ::you cannot assign an existing minecraft loot table!!!
-
-                            LootTable.use[this.LootTable@LootTableToAssign];
                         }
                         :: Possibilities are @Crafting, @Furnace, @Blasting, @Campfire, @Smoking, @Stonecutter
                         @Crafting = new {
@@ -61,27 +46,25 @@ engine:
                             ::Crafting.Drop[vector3(~, 1, ~1), Block("minecraft:whatever")]; ::Create a vector3 in here directly or use an existing one as shown below:
                             ::Crafting.Drop[@vector3Name, Block("minecraft:whatever")]; ::Crafting.Drop[@"vector3", Block("minecraft:whatever")]; where and what block is used to drop @"vector3"
                             ::-------------------------------------------------------------------------------------------------------------
-                            Crafting.UseCustomTable("Crafter"); :: use this if you have one, you can use the default if you want to make a default minecraft item craftable
+                            ::Crafting.UseCustomTable("Crafter"); use this if you have one, you can use the default if you want to make a default minecraft item craftable
                             Crafting.CustomTable[
-
-                                ::Reference(use["Reference_path"]);
-
                                 Create(
-                                    Setup [ 
-                                        Table.Name = "name_string"; ::Color keys are enabled for the name; ::you can do " " too.
+                                    Setup { 
+                                        Table.Name("name_string"); ::Color keys are enabled for the name; ::you can do " " too.
                                         Table.SetCustomModel("path_string"); ::model pathing
                                         Table.SetTexture("path_string"); ::texture pathing
                                         Table.GUI[                              ::setting up crafting table gui
-                                            GUI.SetForegroundIMG("path_string"); ::link a image to a gui image file
-                                            GUI.SetBackgroundIMG("path_string"); ::link a backgroundIMG -> use a color you can't see -> transparency enableds
+                                            GUI.ForegroundIMG("path_string"); ::link a image to a gui image file
+                                            GUI.BackgroundIMG("path_string"); ::link a backgroundIMG -> use a color you can't see -> transparency enableds
                                             GUI.InteractableFields( ::use a chest to look for the right slots and list them like shown
                                                 "0",                
                                                 "5",
                                                 "10"
                                             );
                                         ];
-                                    ];
-                                );                              
+                                    }
+                                );
+                                Reference(use["Reference_path"]);                                
                             ];
                         }                             
                     )];
@@ -92,10 +75,12 @@ engine:
     
     ::will be executed every tick - too many things in here will cause lags ingame
     main [
+        
     ]
 
     ::will be executed every second
-    second [
-    ]
+    second {
+
+    }
 
 :end

@@ -6,9 +6,28 @@ namespace DebuggerLib.EngineSection
 {
     public class Processing
     {
-        public string[] GetEngineSection(string[] content)
+        public static string[] GetEngineSection(List<string> contentOfFile)
         {
-            return null;
+            List<string> lines = new List<string>();
+            bool found = false;
+
+            foreach (string line in contentOfFile)
+            {
+                if (line == "engine:" && !found)
+                    found = true;
+                else if (line != "init:" && line != ":end" && found == true)
+                    lines.Add(line);
+                else if (line == ":end" && found == true)
+                    found = false;
+            }
+
+            return lines.ToArray();
+        }
+
+        public static bool Debug(string[] engineSection, out string error)
+        {
+            error = "";
+            return false;
         }
     }
 }

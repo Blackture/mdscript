@@ -31,6 +31,7 @@ namespace Debugger
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             folderBrowserDialog.ShowNewFolderButton = false;
+            folderBrowserDialog.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             folderBrowserDialog.Description = "Open you project folder";
             DialogResult result = folderBrowserDialog.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
@@ -64,7 +65,7 @@ namespace Debugger
                 else
                 {
                     lbLogger.Items.Add(new System.Windows.Controls.Label() { Content = log, Background = Brushes.DarkGreen, Width = lbLogger.Width - 15, Foreground = Brushes.White });
-                    progress.Value = 50;
+                    progress.Value = 33.3;
                 }
 
                 lbLogger.Items.Add(new System.Windows.Controls.Label() { Content = "🛈 Started debugging process", Background = Brushes.Gold, Width = lbLogger.Width - 15 });
@@ -81,7 +82,7 @@ namespace Debugger
                 else
                 {
                     lbLogger.Items.Add(new System.Windows.Controls.Label() { Content = log, Background = Brushes.DarkGreen, Width = lbLogger.Width - 15, Foreground = Brushes.White });
-                    progress.Value = 100;
+                    progress.Value = 66.6;
                 }
             }
         }

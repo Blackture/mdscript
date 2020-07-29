@@ -85,6 +85,17 @@ namespace DebuggerLib.Debugger
                 message = $"❌ Could not debug the init section. -> {error}";
                 return;
             }
+
+            string[] engineSection = EngineSection.Processing.GetEngineSection(lines);
+            if (EngineSection.Processing.Debug(EngineSection.Processing.GetEngineSection(lines), out error))
+            {
+                Project.EngineSection = engineSection;
+            }
+            else
+            {
+                message = $"❌ Could not debug the engine section. -> {error}";
+                return;
+            }
         }
     }
 }

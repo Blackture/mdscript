@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
+using System.Xml.Schema;
 
 namespace DebuggerLib.InitSection
 {
@@ -38,6 +40,11 @@ namespace DebuggerLib.InitSection
             {
                 if (Datapack.IsValid(line.Trim()) || Reference.IsValid(line.Trim()))
                 {
+                    if (Reference.IsValid(line.Trim()))
+                    {
+                        Reference.GetReferences(line.Trim());
+                    }
+
                     error = "";
                     ok = true;
                 }
@@ -46,6 +53,11 @@ namespace DebuggerLib.InitSection
                     error = $"The {initLines.ToList().IndexOf(line) + 1}. command ({line})!";
                     ok = false;
                 }
+            }
+
+            if (!Reference.ValidReferences(out error))
+            {
+                ok = false;
             }
 
             return ok;
