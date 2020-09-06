@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "XhPtrX6fMoESPGr65vSpUPdxVJ3iHVlnhP3M+wFTmMZdTCSJjdyrWzNyKrnt7cLxcJlF9UxgLO6ItV1h5cSvdA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\patri\\Documents\\GitHub\\mdscript\\Debugger Library\\DebuggerLib\\DebuggerLib\\DebuggerLib.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\patri\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\patri\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
