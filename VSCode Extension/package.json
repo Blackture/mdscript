@@ -5,10 +5,10 @@
 	"version": "0.0.1",
 	"author": {
 		"name": "BlaXrew Studios",
-		"url": "http://www.blaxrew-studios.tk",
-		"email": "blackture@blaxrew-studios.tk"
+		"url": "http://www.blaxrew-studios.vision",
+		"email": "blaxrew.studios@gmail.com"
 	},
-	"icon": "https://www.google.de/url?sa=i&url=http%3A%2F%2Fblaxrew-studios.bplaced.net%2F&psig=AOvVaw1meCxpcr4YrO0nJ8ncr8QU&ust=1587793820655000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOjI1YevgOkCFQAAAAAdAAAAABAD",
+	"icon": "https://lh3.googleusercontent.com/pw/ACtC-3cEDdxdlVEPQHFLOhTtPmbmuNJt2IjpPkTkP6Gj9IdZRO69cZ57ixyU0CtBd_DEVfGnS5U0OHPnpxE63vFY5dkfda944KoZptE8-UBKGXo9iOhocdxByvnGvWhaUUqeC1g82WiVA_mlHtrZW5LMD4C5=w748-h593-no?authuser=0",
 	"engines": {
 		"vscode": "^1.44.0"
 	},
